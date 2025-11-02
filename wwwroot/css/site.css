@@ -1,0 +1,89 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: #f8f9fa;
+}
+
+.navbar {
+  background-color: #ffffff !important;
+}
+
+.navbar-brand i {
+  color: #6610f2;
+  margin-right: 8px;
+}
+
+.nav-link i {
+  margin-right: 5px;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+  border: none;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.progress {
+  background-color: #e9ecef;
+  border-radius: 10px;
+}
+
+.list-group-item {
+  border: none;
+  margin-bottom: 8px;
+  background-color: white;
+  border-radius: 8px !important;
+}
+
+.badge {
+  padding: 8px 12px;
+}
+
+.table {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background-color: #f8f9fa;
+  border-bottom: none;
+  padding: 15px;
+}
+
+.table tbody td {
+  padding: 15px;
+  vertical-align: middle;
+}
+
+.btn-group .btn {
+  padding: 5px 10px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}

@@ -1,0 +1,111 @@
+@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Gestión de Productos";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1>Gestión de Productos</h1>
+            <p class="text-muted">Administra tu inventario completo</p>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary">
+                <i class="bi bi-file-pdf"></i> Exportar a PDF
+            </button>
+            <a href="@Url.Action("Create")" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Agregar Producto
+            </a>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Filtros de búsqueda</h5>
+            <div class="row g-3">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Buscar por nombre, código o lote...">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-select">
+                        <option selected>Todas las categorías</option>
+                        <option>Lácteos</option>
+                        <option>Panadería</option>
+                        <option>Aceites</option>
+                        <option>Granos</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Cantidad</th>
+                    <th>Ubicación</th>
+                    <th>Vencimiento</th>
+                    <th>Estado Stock</th>
+                    <th>Valor Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Code</td>
+                        <td>@product.Name</td>
+                        <td>@product.CategoryName</td>
+                        <td>@product.Quantity</td>
+                        <td>@product.Location</td>
+                        <td>
+                            <span class="badge @(product.Status == "Vencido" ? "bg-danger" : 
+                                               product.Status == "Próximo a vencer" ? "bg-warning" : "bg-success")">
+                                @product.ExpirationDate.ToString("yyyy-MM-dd")
+                                <br />
+                                <small>@product.Status</small>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge @(product.StockStatus == "Bajo Stock" ? "bg-warning" : "bg-success")">
+                                @product.StockStatus
+                            </span>
+                        </td>
+                        <td>$@product.Value.ToString("N2")</td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>Total de productos: @Model.Count()</div>
+        <div>Valor total: $@Model.Sum(p => p.Value).ToString("N2")</div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Aquí puedes agregar JavaScript adicional si es necesario
+    </script>
+}
